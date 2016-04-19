@@ -1,10 +1,21 @@
 package com.chaseswanstrom.sentiment;
 
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import twitter4j.HttpClient;
+import twitter4j.HttpResponse;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,22 +26,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        TwitterManager t = new TwitterManager();
-//        try {
-//            t.performQuery("trump");
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        TextView tv = (TextView) findViewById(R.id.textViewScore);
-//        tv.setText(t.sent.toString());
-        thread.start();
-
+        tweetThread.start();
     }
 
-    Thread thread = new Thread(new Runnable(){
+    Thread tweetThread = new Thread(new Runnable(){
         @Override
         public void run() {
             try {
@@ -38,19 +37,21 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     t.performQuery("trump");
                     TextView tv = (TextView) findViewById(R.id.textViewScore);
-                    tv.setText(t.senti.toString());
+                    //tv.setText(t.senti.toString());
+                    //sentimentThread.start();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
         }
     });
-
 
 }
