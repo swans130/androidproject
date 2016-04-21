@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -19,26 +20,26 @@ import twitter4j.HttpResponse;
 
 public class MainActivity extends AppCompatActivity {
 
+    TwitterManager t = new TwitterManager();
 
-
-    //thread.start();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tweetThread.start();
+
+        Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
+ //       sentimentButton.setOnClickListener();
+//        TextView tv = (TextView) findViewById(R.id.textViewScore);
+//        tv.setText(t.totalScoreFinal.toString());
     }
 
     Thread tweetThread = new Thread(new Runnable(){
         @Override
         public void run() {
             try {
-                TwitterManager t = new TwitterManager();
                 try {
                     t.performQuery("trump");
-                    TextView tv = (TextView) findViewById(R.id.textViewScore);
-                    //tv.setText(t.senti.toString());
-                    //sentimentThread.start();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -49,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
     });
+
+
 
 }

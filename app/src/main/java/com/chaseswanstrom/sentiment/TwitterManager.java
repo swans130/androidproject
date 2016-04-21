@@ -3,11 +3,12 @@ package com.chaseswanstrom.sentiment;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import twitter4j.Query;
@@ -23,15 +24,15 @@ import twitter4j.conf.ConfigurationBuilder;
  */
 public class TwitterManager {
 
-    public String sent;
-    public String senti;
-    private static final String ALLOWED_URI_CHARS = "@#=*+-_.,:!?()/~'%";
-    public String cleanQuery;
 
-    //SentimentClassifier sentClassifier;
-    int LIMIT= 500; //the number of retrieved tweets
+    public String tweetText;
+    public String cleanQuery;
+    public Double totalScoreFinal = 0.0;
+    int limit = 5; //the number of retrieved tweets
+
     ConfigurationBuilder cb;
     Twitter twitter;
+
     public TwitterManager() {
         cb = new ConfigurationBuilder();
         cb.setOAuthConsumerKey("zlSSHxbLCBBwOEIJsLLqvLfgP");
@@ -41,55 +42,77 @@ public class TwitterManager {
         twitter = new TwitterFactory(cb.build()).getInstance();
     }
     public void performQuery(String inQuery) throws InterruptedException, IOException {
+
         Query query = new Query(inQuery);
-        query.setCount(10);
+        //number of retrieved tweets
+        query.setCount(5);
         try {
+
             int count = 0;
             QueryResult r;
                 r = twitter.search(query);
                 ArrayList ts = (ArrayList) r.getTweets();
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < limit; ++i) {
                     count++;
                     Status t = (Status) ts.get(i);
-                    //Status t = ts.get(i);
-                    senti = t.getText();
-                    //text = text.replace("*","");
-                    senti = senti.replace("&", "");
-                    cleanQuery = Uri.encode(senti);
-                    Log.v("tweet: ", senti);
-            URL url;
-            try {
-                Log.e("tweet value:", cleanQuery);
-                HttpURLConnection urlConnection = null;
+                    tweetText = t.getText();
+                    //clean the tweet so it can be added as query in sentiment api string
+                    tweetText = tweetText.replace("&", "");
+                    cleanQuery = Uri.encode(tweetText);
+                    //log the tweet for testing analysis
+                    Log.v("tweet: ", tweetText);
 
+            //set up the sentiment analysis api
+            URL url;
+
+            try {
+
+                //Log.e("tweet value:", cleanQuery); testing to make sure the tweet has been cleaned
+                //feed the tweet into the sentiment api
+                HttpURLConnection urlConnection = null;
                 String api = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text=" + cleanQuery + "&apikey=90b03d84-c5c7-4166-b358-212950d125fc";
                 url = new URL(api);
-                Log.e("PRINTED URL", api);
-
                 urlConnection = (HttpURLConnection) url
                         .openConnection();
-
                 InputStream in = urlConnection.getInputStream();
-                Log.e("blah", "PRINTING");
-                Log.e("tostring", in.toString());
-                Log.e("convert", convertStreamToString(in));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-//                    System.out.println("Text: " + senti);
-//                    String name = t.getUser().getScreenName();
-//                    System.out.println("User: " + name);
-
-                    //sent = sentClassifier.classify(t.getText());
-                    //System.out.println("Sentiment: " + sent);
-
+                String sentimentString = convertStreamToString(in);
+                // this is the full sentiment payload returned from the api
+                Log.e("sentiment string", sentimentString);
+                //turn the string into a json object for parsing
+                JSONObject jsonObject = new JSONObject(sentimentString);
+                // the total score from tweet of sentiment payload, for some reason it is adding it 3 times
+                double score = 0;
+                //get the aggregate object from json payload, isolate the score string, cast to double, add to running total
+                for(int j = 0; j < jsonObject.length(); ++j)
+                {
+                    JSONObject sentimentJson = jsonObject.getJSONObject("aggregate");
+                    String jsonScoreString = sentimentJson.getString("score");
+                    Double jsonScore = Double.parseDouble(jsonScoreString);
+                    score += jsonScore;
                 }
-        }
+
+                //*****BUG BUG BUG BUG BUG BUG********
+                //workaround
+                //the score is being returned 3 times so must divide by 3
+                double totalScore = score / 3.0;
+                totalScoreFinal += totalScore;
+                //Log.d("total score", Double.toString(totalScore)); for testing purposes, will see it added 3 times and thus incorrect
+                Log.d("total score", Double.toString(totalScore));
+
+                } catch (Exception e) {
+                e.printStackTrace();
+                     }
+                }
+                //this is the final score for the entire query
+                Log.d("final score", Double.toString(totalScoreFinal));
+            }
+        //if twitter api fails
         catch (TwitterException te) {
             System.out.println("Couldn't connect: " + te);
         }
     }
+
+    //method to return the input stream from sentiment api to a java string
     String convertStreamToString(java.io.InputStream is) {
         try {
             return new java.util.Scanner(is).useDelimiter("\\A").next();
