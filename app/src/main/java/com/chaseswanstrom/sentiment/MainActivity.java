@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
-
 
         if (sentimentButton != null) {
             sentimentButton.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
                     queryWord = qw.getText().toString();
-                    tweetThread.start();
+                    tweetAsync ta = new tweetAsync();
+                    ta.execute(queryWord);
                 }
 
             });
@@ -53,8 +52,46 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public class tweetAsync extends AsyncTask<String, Void, String>{
 
-    Thread tweetThread = new Thread(new Runnable(){
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                try {
+                    t.performQuery(queryWord);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            isDone = true;
+            return "Executed";
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
+
+
+    }
+}
+    /*Thread tweetThread = new Thread(new Runnable(){
         @Override
         public void run() {
             try {
@@ -72,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-    });
+    });*/
 
-}
+
 
