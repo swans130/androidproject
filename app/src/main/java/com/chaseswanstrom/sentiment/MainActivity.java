@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -20,26 +22,44 @@ import twitter4j.HttpResponse;
 
 public class MainActivity extends AppCompatActivity {
 
+    public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
-
+    static String queryWord = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tweetThread.start();
+
 
         Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
- //       sentimentButton.setOnClickListener();
-//        TextView tv = (TextView) findViewById(R.id.textViewScore);
-//        tv.setText(t.totalScoreFinal.toString());
+
+
+        if (sentimentButton != null) {
+            sentimentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
+                    queryWord = qw.getText().toString();
+                    tweetThread.start();
+                }
+
+            });
+        }
+
+        if(isDone) {
+            TextView tv = (TextView) findViewById(R.id.textViewScore);
+                    tv.setText(t.totalScoreFinal.toString());
+        }
+
     }
+
 
     Thread tweetThread = new Thread(new Runnable(){
         @Override
         public void run() {
             try {
                 try {
-                    t.performQuery("trump");
+                    t.performQuery(queryWord);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -50,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     });
 
-
-
 }
+

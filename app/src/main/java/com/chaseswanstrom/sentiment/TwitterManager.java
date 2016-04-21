@@ -105,11 +105,15 @@ public class TwitterManager {
                 }
                 //this is the final score for the entire query
                 Log.d("final score", Double.toString(totalScoreFinal));
+            MainActivity m = new MainActivity();
+            m.isDone = true;
             }
         //if twitter api fails
         catch (TwitterException te) {
             System.out.println("Couldn't connect: " + te);
         }
+
+
     }
 
     //method to return the input stream from sentiment api to a java string
