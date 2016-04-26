@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -22,6 +26,10 @@ import twitter4j.HttpResponse;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Animation points
+    private static final float ROTATE_FROM = 0.0f;
+    private static final float ROTATE_TO = 10.0f * 360.0f;// 3.141592654f * 32.0f;
+
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
     static String queryWord1 = "";
@@ -31,7 +39,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
+        final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
+        final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
+        final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotation.setInterpolator(new LinearInterpolator());
+        rotation.setRepeatCount(Animation.INFINITE);
+        rotation.setDuration(20000);
+        imgSpinner.setVisibility(View.INVISIBLE);
 
         if (sentimentButton != null) {
             sentimentButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                     queryWord2 = qw2.getText().toString();
                     tweetAsync ta2 = new tweetAsync();
                     ta2.execute(queryWord2);
+                    sentimentButton.setVisibility(View.INVISIBLE);
+                    imgSpinner.setVisibility(View.VISIBLE);
+                    imgSpinner.startAnimation(rotation);
                 }
 
             });
@@ -84,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+
+            ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
+            imgSpinner.setAnimation(null);
+            imgSpinner.setVisibility(View.INVISIBLE);
+
 
             TextView tv = (TextView) findViewById(R.id.textViewScore);
             tv.setText(t.totalScoreFinal.toString());
