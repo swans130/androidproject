@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
-    static String queryWord = "";
+    static String queryWord1 = "";
+    static String queryWord2 = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +38,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
-                    queryWord = qw.getText().toString();
+                    queryWord1 = qw.getText().toString();
                     tweetAsync ta = new tweetAsync();
-                    ta.execute(queryWord);
+                    ta.execute(queryWord1);
+                    EditText qw2 = (EditText) findViewById(R.id.editTextQueryWord2);
+                    queryWord2 = qw2.getText().toString();
+                    tweetAsync ta2 = new tweetAsync();
+                    ta2.execute(queryWord2);
                 }
 
             });
-        }
-
-        if(isDone) {
-            TextView tv = (TextView) findViewById(R.id.textViewScore);
-                    tv.setText(t.totalScoreFinal.toString());
         }
 
     }
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 try {
-                    t.performQuery(queryWord);
-
+                    t.performQuery(queryWord1);
+                    t.performQuery2(queryWord2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            isDone = true;
             return "Executed";
         }
 
@@ -86,30 +85,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            TextView tv = (TextView) findViewById(R.id.textViewScore);
+            tv.setText(t.totalScoreFinal.toString());
+            if(t.totalScoreFinal > t.totalScoreFinal2) {
+                tv.setText(queryWord1.toString() + "Wins!");
+                tv.setBackgroundColor(0xFF00FF00);
+            }
+            else {
+                tv.setText(queryWord2.toString() + "Wins!");
+                tv.setBackgroundColor(0xFF00FF00);
+            }
         }
-
 
     }
 }
-    /*Thread tweetThread = new Thread(new Runnable(){
-        @Override
-        public void run() {
-            try {
-                try {
-                    t.performQuery(queryWord);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    });*/
 
 
 

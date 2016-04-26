@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Query Word"
+        android:text="Enter Two Terms!"
         android:id="@+id/TextViewQuery"
         android:layout_marginTop="39dp"
         android:layout_alignParentTop="true"
@@ -23,17 +23,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextQueryWord"
-        android:layout_below="@+id/TextViewQuery"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/buttonSentiment"
+        android:layout_alignLeft="@+id/TextViewQuery"
+        android:layout_alignStart="@+id/TextViewQuery" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Sentiment"
         android:id="@+id/buttonSentiment"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/editTextQueryWord"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editTextQueryWord2"
+        android:layout_toRightOf="@+id/editTextQueryWord"
+        android:layout_toEndOf="@+id/editTextQueryWord" />
 
     <TextView
         android:layout_width="300dp"
@@ -43,6 +44,15 @@
         android:textSize="50dp"
         android:id="@+id/textViewScore"
         android:layout_below="@+id/buttonSentiment"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextQueryWord2"
+        android:layout_below="@+id/TextViewQuery"
+        android:layout_alignRight="@+id/buttonSentiment"
+        android:layout_alignEnd="@+id/buttonSentiment" />
 
 </RelativeLayout>
