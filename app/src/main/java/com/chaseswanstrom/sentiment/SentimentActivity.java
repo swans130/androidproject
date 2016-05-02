@@ -1,8 +1,10 @@
 package com.chaseswanstrom.sentiment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +34,14 @@ public class SentimentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentiment);
 
+        GradientDrawable gd = new GradientDrawable();
+        gd.setCornerRadius(5);
+        gd.setStroke(4, 0xffffffff);
+
+        final Button results = (Button) findViewById(R.id.buttonResults);
+        results.setVisibility(View.INVISIBLE);
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
+        sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
         final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotation.setInterpolator(new LinearInterpolator());
@@ -64,8 +73,10 @@ public class SentimentActivity extends AppCompatActivity {
 
     public class tweetAsync extends AsyncTask<String, Void, String> {
 
+
         @Override
         protected void onPreExecute() {
+
 
         }
 
@@ -96,16 +107,29 @@ public class SentimentActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
-            imgSpinner.setAnimation(null);
-            imgSpinner.setVisibility(View.INVISIBLE);
-
-
-            TextView tv = (TextView) findViewById(R.id.textViewScore);
-            tv.setText(t.totalScoreFinal.toString());
             GradientDrawable gd = new GradientDrawable();
             gd.setCornerRadius(5);
             gd.setStroke(4, 0xffffffff);
+
+            ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
+            imgSpinner.setAnimation(null);
+
+            //imgSpinner.setVisibility(View.INVISIBLE);
+
+            Button results = (Button) findViewById(R.id.buttonResults);
+            results.setVisibility(View.VISIBLE);
+            results.setBackground(gd);
+            results.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            TextView tv = (TextView) findViewById(R.id.textViewScore);
+            tv.setText(t.totalScoreFinal.toString());
+
             if(t.totalScoreFinal > t.totalScoreFinal2) {
                 tv.setText(queryWord1.toString().toUpperCase() + " WINS!");
                 tv.setBackground(gd);

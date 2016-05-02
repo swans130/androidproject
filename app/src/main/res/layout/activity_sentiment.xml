@@ -14,7 +14,7 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="Twitter FaceOff!"
+    android:text="T w i t M a s h"
     android:textColor="#FFFFFF"
     android:textStyle="bold"
     android:id="@+id/TextViewQuery"
@@ -27,16 +27,17 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:layout_width="150dp"
     android:layout_height="50dp"
     android:text="Battle!"
+    android:background="#4cc4ff"
     android:textColor="#FFFFFF"
     android:id="@+id/buttonSentiment"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"/>
 
 <TextView
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="80dp"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textSize="45dp"
+    android:textSize="30dp"
     android:textAlignment="center"
     android:textColor="#FFFFFF"
     android:padding="5dp"
@@ -69,13 +70,24 @@ tools:context="com.chaseswanstrom.SentimentActivity">
         android:layout_alignParentEnd="true" />
 
 <ImageView
-    android:layout_width="150dp"
-    android:layout_height="150dp"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
     android:id="@+id/imgSpinner"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
     android:visibility="visible"
     android:contentDescription="loadingSpinner"
-    android:src="@drawable/twittersquarelogo" />
+    android:src="@drawable/twittersquarelogo"
+    android:layout_below="@+id/editTextQueryWord"
+    android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RESULTS!"
+        android:textColor="#FFFFFF"
+        android:background="#4cc4ff"
+        android:id="@+id/buttonResults"
+        android:layout_below="@+id/textViewScore"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

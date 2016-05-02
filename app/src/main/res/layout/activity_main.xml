@@ -14,8 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Twitter FaceOff!"
-        android:id="@+id/TextViewQuery"
+        android:text="T w i t M a s h"
+        android:id="@+id/TextViewTitleMain"
+        android:padding="5dp"
         android:textColor="#FFFFFF"
         android:layout_marginTop="62dp"
         android:layout_alignParentTop="true"
@@ -29,7 +30,6 @@
         android:visibility="visible"
         android:contentDescription="loadingSpinner"
         android:src="@drawable/twittersquarelogo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/TextViewQuery" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.chaseswanstrom.sentiment;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -34,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GradientDrawable gd = new GradientDrawable();
+        gd.setCornerRadius(5);
+        gd.setStroke(4, 0xffffffff);
+
+        TextView title = (TextView) findViewById(R.id.TextViewTitleMain);
+        title.setBackground(gd);
 
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
         final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
