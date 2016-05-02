@@ -15,27 +15,19 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="Twitter FaceOff!"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold"
     android:id="@+id/TextViewQuery"
-    android:layout_marginTop="62dp"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true" />
 
-<EditText
-    android:layout_width="120dp"
-    android:layout_height="30dp"
-    android:hint="#SecondWord"
-    android:id="@+id/editTextQueryWord2"
-    android:background="#99f2f3"
-    android:textAlignment="center"
-    android:layout_marginLeft="50dp"
-    android:layout_toRightOf="@+id/editTextQueryWord"
-    android:layout_below="@+id/TextViewQuery"
-    android:layout_marginTop="40dp"/>
+
 
 <Button
     android:layout_width="150dp"
     android:layout_height="50dp"
-    android:text="Find Sentiment"
+    android:text="Battle!"
+    android:textColor="#FFFFFF"
     android:id="@+id/buttonSentiment"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"/>
@@ -44,23 +36,37 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:layout_width="300dp"
     android:layout_height="80dp"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textSize="50dp"
+    android:textSize="45dp"
     android:textAlignment="center"
+    android:textColor="#FFFFFF"
+    android:padding="5dp"
     android:id="@+id/textViewScore"
     android:layout_below="@+id/buttonSentiment"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="30dp" />
 
 <EditText
-    android:layout_width="120dp"
+    android:layout_width="150dp"
     android:layout_height="30dp"
     android:id="@+id/editTextQueryWord"
-    android:hint="#FirstWord"
+    android:hint="#First Word"
     android:background="#99f2f3"
-    android:layout_marginLeft="50dp"
     android:textAlignment="center"
+    android:layout_marginTop="49dp"
     android:layout_below="@+id/TextViewQuery"
-    android:layout_marginTop="40dp" />
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:id="@+id/editTextQueryWord2"
+        android:hint="#Second Word"
+        android:background="#99f2f3"
+        android:textAlignment="center"
+        android:layout_alignTop="@+id/editTextQueryWord"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 <ImageView
     android:layout_width="150dp"

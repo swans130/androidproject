@@ -1,5 +1,7 @@
 package com.chaseswanstrom.sentiment;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -90,6 +92,7 @@ public class SentimentActivity extends AppCompatActivity {
 
         }
 
+        @SuppressLint("NewApi")
         @Override
         protected void onPostExecute(String result) {
 
@@ -100,13 +103,16 @@ public class SentimentActivity extends AppCompatActivity {
 
             TextView tv = (TextView) findViewById(R.id.textViewScore);
             tv.setText(t.totalScoreFinal.toString());
+            GradientDrawable gd = new GradientDrawable();
+            gd.setCornerRadius(5);
+            gd.setStroke(4, 0xffffffff);
             if(t.totalScoreFinal > t.totalScoreFinal2) {
-                tv.setText(queryWord1.toString() + "Wins!");
-                tv.setBackgroundColor(0xFF00FF00);
+                tv.setText(queryWord1.toString().toUpperCase() + " WINS!");
+                tv.setBackground(gd);
             }
             else {
-                tv.setText(queryWord2.toString() + "Wins!");
-                tv.setBackgroundColor(0xFF00FF00);
+                tv.setText(queryWord2.toString().toUpperCase() + " WINS!");
+                tv.setBackground(gd);
             }
         }
 

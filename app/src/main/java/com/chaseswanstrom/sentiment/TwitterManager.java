@@ -53,7 +53,7 @@ public class TwitterManager {
             QueryResult r;
                 r = twitter.search(query);
                 ArrayList ts = (ArrayList) r.getTweets();
-                for (int i = 0; i < limit; ++i) {
+                for (int i = 0; i < limit - 1; ++i) {
                     count++;
                     Status t = (Status) ts.get(i);
                     tweetText = t.getText();
@@ -129,7 +129,7 @@ public class TwitterManager {
             QueryResult r;
             r = twitter.search(query);
             ArrayList ts = (ArrayList) r.getTweets();
-            for (int i = 0; i < limit; ++i) {
+            for (int i = 0; i < limit - 1; ++i) {
                 count++;
                 Status t = (Status) ts.get(i);
                 tweetText = t.getText();
