@@ -40,6 +40,8 @@ public class battleActivity extends AppCompatActivity {
         gd.setStroke(4, 0xffffffff);
 
         final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
+        final Button retryButton = (Button) findViewById(R.id.retryButton);
+        retryButton.setVisibility(View.INVISIBLE);
         final Button results = (Button) findViewById(R.id.buttonResults);
         results.setVisibility(View.INVISIBLE);
         final Button topmashers = (Button) findViewById(R.id.buttontm);
@@ -58,6 +60,8 @@ public class battleActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
+                    final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
+                    singleModeButton.setVisibility(View.INVISIBLE);
                     queryWord1 = qw.getText().toString();
                     tweetAsync ta = new tweetAsync();
                     ta.execute(queryWord1);
@@ -77,6 +81,15 @@ public class battleActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent myIntent = new Intent(battleActivity.this, SentimentActivity.class);
+                battleActivity.this.startActivity(myIntent);
+            }
+        });
+
+        retryButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent myIntent = new Intent(battleActivity.this, battleActivity.class);
                 battleActivity.this.startActivity(myIntent);
             }
         });
@@ -162,10 +175,10 @@ public class battleActivity extends AppCompatActivity {
                 }
             });
 
-            final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
-            singleModeButton.setVisibility(View.INVISIBLE);
-
             TextView tv = (TextView) findViewById(R.id.textViewScore);
+            final Button retryButton = (Button) findViewById(R.id.retryButton);
+            retryButton.setVisibility(View.VISIBLE);
+            imgSpinner.setVisibility(View.INVISIBLE);
             tv.setText(t.totalScoreFinal.toString());
             if(t.totalScoreFinal > t.totalScoreFinal2) {
                 tv.setText(queryWord1.toString().toUpperCase() + " WINS!");

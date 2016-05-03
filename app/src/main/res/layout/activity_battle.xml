@@ -41,7 +41,7 @@ tools:context="com.chaseswanstrom.sentiment.battleActivity">
     android:textSize="30dp"
     android:textAlignment="center"
     android:textColor="#FFFFFF"
-    android:padding="5dp"
+    android:padding="0dp"
     android:id="@+id/textViewScore"
     android:layout_below="@+id/buttonSentiment"
     android:layout_centerHorizontal="true"
@@ -77,7 +77,7 @@ tools:context="com.chaseswanstrom.sentiment.battleActivity">
     android:visibility="visible"
     android:contentDescription="loadingSpinner"
     android:src="@drawable/twitmashlogo"
-    android:layout_alignBottom="@+id/buttonResults"
+    android:layout_centerVertical="true"
     android:layout_centerHorizontal="true" />
 
 <Button
@@ -108,8 +108,18 @@ tools:context="com.chaseswanstrom.sentiment.battleActivity">
         android:background="#4cc4ff"
         android:textColor="#FFFFFF"
         android:id="@+id/sentimentButtonMode"
-        android:layout_alignBottom="@+id/imgSpinner"
+        android:layout_below="@+id/textViewScore"
         android:layout_alignLeft="@+id/buttonSentiment"
         android:layout_alignStart="@+id/buttonSentiment" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Retry?"
+        android:background="#4cc4ff"
+        android:textColor="#FFFFFF"
+        android:id="@+id/retryButton"
+        android:layout_above="@+id/buttonSentiment"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

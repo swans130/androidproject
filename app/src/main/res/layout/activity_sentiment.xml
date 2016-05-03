@@ -32,7 +32,7 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:textColor="#FFFFFF"
     android:id="@+id/buttonSentiment"
     android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"/>
+    android:layout_centerHorizontal="true" />
 
 <TextView
     android:layout_width="match_parent"
@@ -41,11 +41,11 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:textSize="30dp"
     android:textAlignment="center"
     android:textColor="#FFFFFF"
-    android:padding="5dp"
     android:id="@+id/textViewScore"
-    android:layout_below="@+id/buttonSentiment"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="35dp" />
+    android:layout_below="@+id/buttonSentiment"
+    android:padding="0dp"
+    android:layout_above="@+id/buttonResults" />
 
 <EditText
     android:layout_width="150dp"
@@ -76,19 +76,9 @@ tools:context="com.chaseswanstrom.SentimentActivity">
         android:textColor="#FFFFFF"
         android:background="#4cc4ff"
         android:id="@+id/buttonResults"
-        android:layout_below="@+id/textViewScore"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TOP MASHERS!"
-        android:textColor="#FFFFFF"
-        android:background="#4cc4ff"
-        android:id="@+id/buttontm"
-        android:layout_below="@+id/imgSpinner"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="150dp"
@@ -97,10 +87,19 @@ tools:context="com.chaseswanstrom.SentimentActivity">
         android:background="#4cc4ff"
         android:textColor="#FFFFFF"
         android:id="@+id/battleModeButton"
-        android:layout_alignBaseline="@+id/buttonResults"
-        android:layout_alignBottom="@+id/buttonResults"
+        android:onClick="sendMessage"
+        android:layout_above="@+id/buttonResults"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Retry?"
+        android:background="#4cc4ff"
+        android:textColor="#FFFFFF"
+        android:id="@+id/retryButton"
+        android:layout_above="@+id/buttonSentiment"
         android:layout_alignLeft="@+id/buttonSentiment"
-        android:layout_alignStart="@+id/buttonSentiment"
-        android:onClick="sendMessage" />
+        android:layout_alignStart="@+id/buttonSentiment" />
 
 </RelativeLayout>

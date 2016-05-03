@@ -37,11 +37,11 @@ public class SentimentActivity extends AppCompatActivity {
         gd.setCornerRadius(5);
         gd.setStroke(4, 0xffffffff);
 
+        final Button retryButton = (Button) findViewById(R.id.retryButton);
+        retryButton.setVisibility(View.INVISIBLE);
         final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
         final Button results = (Button) findViewById(R.id.buttonResults);
         results.setVisibility(View.INVISIBLE);
-        final Button topmashers = (Button) findViewById(R.id.buttontm);
-        topmashers.setVisibility(View.INVISIBLE);
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
         sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
@@ -57,6 +57,8 @@ public class SentimentActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
                     queryWord1 = qw.getText().toString();
+                    final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
+                    battleModeButton.setVisibility(View.INVISIBLE);
                     tweetAsync ta = new tweetAsync();
                     ta.execute(queryWord1);
                     sentimentButton.setVisibility(View.INVISIBLE);
@@ -72,6 +74,14 @@ public class SentimentActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent myIntent = new Intent(SentimentActivity.this, battleActivity.class);
+                SentimentActivity.this.startActivity(myIntent);
+            }
+        });
+        retryButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent myIntent = new Intent(SentimentActivity.this, SentimentActivity.class);
                 SentimentActivity.this.startActivity(myIntent);
             }
         });
@@ -126,6 +136,7 @@ public class SentimentActivity extends AppCompatActivity {
 
             ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
             imgSpinner.setAnimation(null);
+            imgSpinner.setVisibility(View.INVISIBLE);
 
             Button results = (Button) findViewById(R.id.buttonResults);
             results.setVisibility(View.VISIBLE);
@@ -138,23 +149,13 @@ public class SentimentActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            Button topmashers = (Button) findViewById(R.id.buttontm);
-            topmashers.setVisibility(View.VISIBLE);
-            topmashers.setBackground(gd);
-            topmashers.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
-                    intent.putExtra("neutral", t.firstNeutralCount + "");
-                    startActivity(intent);
-                }
-            });
-            final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
-            battleModeButton.setVisibility(View.INVISIBLE);
             TextView tv = (TextView) findViewById(R.id.textViewScore);
             tv.setText(t.totalScoreFinal.toString());
             String score = t.totalScoreFinal.toString();
+            score = score.substring(0, 5);
             tv.setText(queryWord1.toString().toUpperCase() + " SCORE IS " + score);
+            final Button retryButton = (Button) findViewById(R.id.retryButton);
+            retryButton.setVisibility(View.VISIBLE);
             tv.setBackground(gd);
 
 
