@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="#4cc4ff"
+    tools:context="com.chaseswanstrom.sentiment.TopMashersActivity">
+
+    <TextView
+        android:id="@+id/tvBorderT1Positive"
+        android:layout_width="280dp"
+        android:layout_height="130dp"
+        android:layout_alignLeft="@+id/ibT1Positive"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginTop="-10dp"
+        android:layout_alignTop="@+id/ibT1Positive"
+        android:background="#aaaaaa"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="T o p M a s h e r s"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:id="@+id/tvTitle"
+        android:textColor="#FFFFFF"
+        android:textSize="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/ibT1Positive"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/twittersquarelogo"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        />
+    <TextView
+        android:id="@+id/tvDisplaynameT1Positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DisplayNameGoesHere"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/ibT1Positive"/>
+    <TextView
+        android:id="@+id/tvUsernameT1Positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@UserNameGoesHere"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvDisplaynameT1Positive"
+        android:layout_toRightOf="@+id/ibT1Positive"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The actual tweet text will go here, it should be long enough to support 140 characters. This phrase right here is actually 140 characters!!!"
+        android:layout_below="@+id/ibT1Positive"
+        android:layout_alignLeft="@id/ibT1Positive"
+        android:layout_marginRight="60dp"
+        android:id="@+id/tvTweetT1Positive"/>
+</RelativeLayout>

@@ -91,15 +91,6 @@ tools:context="com.chaseswanstrom.sentiment.battleActivity">
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true" />
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="TOP MASHERS!"
-    android:textColor="#FFFFFF"
-    android:background="#4cc4ff"
-    android:id="@+id/buttontm"
-    android:layout_below="@+id/imgSpinner"
-    android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="150dp"

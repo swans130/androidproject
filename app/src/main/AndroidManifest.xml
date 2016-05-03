@@ -28,6 +28,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".battleActivity"></activity>
+        <activity android:name=".TopMashersActivity"></activity>
     </application>
 
 </manifest>

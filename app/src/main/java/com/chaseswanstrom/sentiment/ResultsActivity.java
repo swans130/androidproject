@@ -5,6 +5,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -46,6 +48,15 @@ public class ResultsActivity extends AppCompatActivity {
         results2.setText("Positive Tweets: " + intent.getStringExtra("positive2").toString() + "\n"
                 + "Neutral Tweets: " + intent.getStringExtra("neutral2").toString() + "\n" + "Negative Tweets: " + intent.getStringExtra("negative2").toString());
 
+
+        Button topMashers = (Button) findViewById(R.id.buttonTM);
+        topMashers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(ResultsActivity.this, TopMashersActivity.class);
+                ResultsActivity.this.startActivity(myIntent);
+            }
+        });
 
     }
 }

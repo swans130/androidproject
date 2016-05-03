@@ -44,8 +44,6 @@ public class battleActivity extends AppCompatActivity {
         retryButton.setVisibility(View.INVISIBLE);
         final Button results = (Button) findViewById(R.id.buttonResults);
         results.setVisibility(View.INVISIBLE);
-        final Button topmashers = (Button) findViewById(R.id.buttontm);
-        topmashers.setVisibility(View.INVISIBLE);
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
         sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
@@ -160,17 +158,6 @@ public class battleActivity extends AppCompatActivity {
                     intent.putExtra("positive2", t.secondPosCount / 3 + "");
                     intent.putExtra("neutral2", t.secondNeutralCount / 3 + "");
                     intent.putExtra("negative2", t.secondNegCount / 3 + "");
-                    startActivity(intent);
-                }
-            });
-            Button topmashers = (Button) findViewById(R.id.buttontm);
-            topmashers.setVisibility(View.VISIBLE);
-            topmashers.setBackground(gd);
-            topmashers.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
-                    intent.putExtra("neutral", t.firstNeutralCount + "");
                     startActivity(intent);
                 }
             });
