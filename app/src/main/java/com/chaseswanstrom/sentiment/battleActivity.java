@@ -141,7 +141,12 @@ public class battleActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
-                    intent.putExtra("neutral", t.firstNeutralCount + "");
+                    intent.putExtra("positive", t.firstPosCount / 3 + "");
+                    intent.putExtra("neutral", t.firstNeutralCount / 3 + "");
+                    intent.putExtra("negative", t.firstNegCount / 3 + "");
+                    intent.putExtra("positive2", t.secondPosCount / 3 + "");
+                    intent.putExtra("neutral2", t.secondNeutralCount / 3 + "");
+                    intent.putExtra("negative2", t.secondNegCount / 3 + "");
                     startActivity(intent);
                 }
             });

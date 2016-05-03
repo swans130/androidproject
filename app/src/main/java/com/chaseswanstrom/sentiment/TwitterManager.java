@@ -85,7 +85,7 @@ public class TwitterManager {
                 InputStream in = urlConnection.getInputStream();
                 String sentimentString = convertStreamToString(in);
                 // this is the full sentiment payload returned from the api
-                Log.e("sentiment string", sentimentString);
+                Log.e("sentiment string 111111", sentimentString);
                 //turn the string into a json object for parsing
                 JSONObject jsonObject = new JSONObject(sentimentString);
                 // the total score from tweet of sentiment payload, for some reason it is adding it 3 times
@@ -107,14 +107,14 @@ public class TwitterManager {
                         ++firstNeutralCount;
                     }
                 }
-
+                //firstPosCount = (firstPosCount);
                 //*****BUG BUG BUG BUG BUG BUG********
                 //workaround
                 //the score is being returned 3 times so must divide by 3
                 double totalScore = score / 3.0;
                 totalScoreFinal += totalScore;
                 //Log.d("total score", Double.toString(totalScore)); for testing purposes, will see it added 3 times and thus incorrect
-                Log.d("total score", Double.toString(totalScore));
+                Log.d("total score tweet 1", Double.toString(totalScore));
 
                 } catch (Exception e) {
                 e.printStackTrace();
@@ -170,7 +170,7 @@ public class TwitterManager {
                     InputStream in = urlConnection.getInputStream();
                     String sentimentString = convertStreamToString(in);
                     // this is the full sentiment payload returned from the api
-                    Log.e("sentiment string", sentimentString);
+                    Log.e("sentiment string222222", sentimentString);
                     //turn the string into a json object for parsing
                     JSONObject jsonObject = new JSONObject(sentimentString);
                     // the total score from tweet of sentiment payload, for some reason it is adding it 3 times
