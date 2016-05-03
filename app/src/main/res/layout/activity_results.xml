@@ -11,10 +11,11 @@
     tools:context="com.chaseswanstrom.sentiment.ResultsActivity">
 
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="R e s u l t s"
+    android:textAlignment="center"
     android:padding="5dp"
     android:id="@+id/TextViewTitle"
     android:textColor="#FFFFFF"
