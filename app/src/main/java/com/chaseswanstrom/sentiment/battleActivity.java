@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-public class SentimentActivity extends AppCompatActivity {
+public class battleActivity extends AppCompatActivity {
 
 
     //Animation points
@@ -28,16 +28,18 @@ public class SentimentActivity extends AppCompatActivity {
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
     public static String queryWord1 = "";
+    public static String queryWord2 = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sentiment);
+        setContentView(R.layout.activity_battle);
 
         GradientDrawable gd = new GradientDrawable();
         gd.setCornerRadius(5);
         gd.setStroke(4, 0xffffffff);
 
-        final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
+        final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
         final Button results = (Button) findViewById(R.id.buttonResults);
         results.setVisibility(View.INVISIBLE);
         final Button topmashers = (Button) findViewById(R.id.buttontm);
@@ -59,6 +61,10 @@ public class SentimentActivity extends AppCompatActivity {
                     queryWord1 = qw.getText().toString();
                     tweetAsync ta = new tweetAsync();
                     ta.execute(queryWord1);
+                    EditText qw2 = (EditText) findViewById(R.id.editTextQueryWord2);
+                    queryWord2 = qw2.getText().toString();
+                    tweetAsync ta2 = new tweetAsync();
+                    ta2.execute(queryWord2);
                     sentimentButton.setVisibility(View.INVISIBLE);
                     imgSpinner.setVisibility(View.VISIBLE);
                     imgSpinner.startAnimation(rotation);
@@ -66,21 +72,21 @@ public class SentimentActivity extends AppCompatActivity {
 
             });
         }
-
-        battleModeButton.setOnClickListener(new View.OnClickListener()
+        singleModeButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                Intent myIntent = new Intent(SentimentActivity.this, battleActivity.class);
-                SentimentActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(battleActivity.this, SentimentActivity.class);
+                battleActivity.this.startActivity(myIntent);
             }
         });
+
     }
 
-    /*public void sendMessage (View view){
-        Intent intent = new Intent (SentimentActivity.this, battleActivity.class);
+    public void sendMessage (View view){
+        Intent intent = new Intent (this, battleActivity.class);
         startActivity(intent);
-    }*/
+    }
 
     public class tweetAsync extends AsyncTask<String, Void, String> {
 
@@ -97,6 +103,7 @@ public class SentimentActivity extends AppCompatActivity {
             try {
                 try {
                     t.performQuery(queryWord1);
+                    t.performQuery2(queryWord2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -149,19 +156,23 @@ public class SentimentActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
-            battleModeButton.setVisibility(View.INVISIBLE);
+
+            final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
+            singleModeButton.setVisibility(View.INVISIBLE);
+
             TextView tv = (TextView) findViewById(R.id.textViewScore);
             tv.setText(t.totalScoreFinal.toString());
-            String score = t.totalScoreFinal.toString();
-            tv.setText(queryWord1.toString().toUpperCase() + " SCORE IS " + score);
-            tv.setBackground(gd);
-
-
+            if(t.totalScoreFinal > t.totalScoreFinal2) {
+                tv.setText(queryWord1.toString().toUpperCase() + " WINS!");
+                tv.setBackground(gd);
+            }
+            else {
+                tv.setText(queryWord2.toString().toUpperCase() + " WINS!");
+                tv.setBackground(gd);
+            }
         }
 
     }
 }
-
 
 

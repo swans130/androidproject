@@ -39,9 +39,8 @@ public class ResultsActivity extends AppCompatActivity {
         + "Neutral Tweets: " + t.firstNeutralCount);
 
         TextView query2 = (TextView) findViewById(R.id.textViewQuery2term);
-        query2.setBackground(gd);
-        query2.setText(s.queryWord2.toUpperCase());
-
+        //query2.setBackground(gd);
+        //query2.setText(s.queryWord2.toUpperCase());
 
     }
 }
