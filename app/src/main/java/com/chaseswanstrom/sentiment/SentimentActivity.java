@@ -27,8 +27,8 @@ public class SentimentActivity extends AppCompatActivity {
 
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
-    static String queryWord1 = "";
-    static String queryWord2 = "";
+    public static String queryWord1 = "";
+    public static String queryWord2 = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,8 @@ public class SentimentActivity extends AppCompatActivity {
 
         final Button results = (Button) findViewById(R.id.buttonResults);
         results.setVisibility(View.INVISIBLE);
+        final Button topmashers = (Button) findViewById(R.id.buttontm);
+        topmashers.setVisibility(View.INVISIBLE);
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
         sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
@@ -73,6 +75,7 @@ public class SentimentActivity extends AppCompatActivity {
 
     public class tweetAsync extends AsyncTask<String, Void, String> {
 
+        ResultsActivity r = new ResultsActivity();
 
         @Override
         protected void onPreExecute() {
@@ -107,14 +110,14 @@ public class SentimentActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            //r.test = t.firstNeutralCount;
+
             GradientDrawable gd = new GradientDrawable();
             gd.setCornerRadius(5);
             gd.setStroke(4, 0xffffffff);
 
             ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
             imgSpinner.setAnimation(null);
-
-            //imgSpinner.setVisibility(View.INVISIBLE);
 
             Button results = (Button) findViewById(R.id.buttonResults);
             results.setVisibility(View.VISIBLE);
@@ -123,6 +126,18 @@ public class SentimentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                    intent.putExtra("neutral", t.firstNeutralCount + "");
+                    startActivity(intent);
+                }
+            });
+            Button topmashers = (Button) findViewById(R.id.buttontm);
+            topmashers.setVisibility(View.VISIBLE);
+            topmashers.setBackground(gd);
+            topmashers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                    intent.putExtra("neutral", t.firstNeutralCount + "");
                     startActivity(intent);
                 }
             });

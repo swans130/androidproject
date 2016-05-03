@@ -18,6 +18,7 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:textColor="#FFFFFF"
     android:textStyle="bold"
     android:id="@+id/TextViewQuery"
+    android:textSize="35dp"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true" />
 
@@ -44,7 +45,7 @@ tools:context="com.chaseswanstrom.SentimentActivity">
     android:id="@+id/textViewScore"
     android:layout_below="@+id/buttonSentiment"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="30dp" />
+    android:layout_marginTop="35dp" />
 
 <EditText
     android:layout_width="150dp"
@@ -70,13 +71,13 @@ tools:context="com.chaseswanstrom.SentimentActivity">
         android:layout_alignParentEnd="true" />
 
 <ImageView
-    android:layout_width="100dp"
+    android:layout_width="125dp"
     android:layout_height="wrap_content"
     android:id="@+id/imgSpinner"
     android:visibility="visible"
     android:contentDescription="loadingSpinner"
-    android:src="@drawable/twittersquarelogo"
-    android:layout_below="@+id/editTextQueryWord"
+    android:src="@drawable/twitmashlogo"
+    android:layout_alignBottom="@+id/buttonResults"
     android:layout_centerHorizontal="true" />
 
     <Button
@@ -89,5 +90,15 @@ tools:context="com.chaseswanstrom.SentimentActivity">
         android:layout_below="@+id/textViewScore"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TOP MASHERS!"
+        android:textColor="#FFFFFF"
+        android:background="#4cc4ff"
+        android:id="@+id/buttontm"
+        android:layout_below="@+id/imgSpinner"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

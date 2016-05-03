@@ -29,6 +29,13 @@ public class TwitterManager {
     public String cleanQuery;
     public Double totalScoreFinal = 0.0;
     public Double totalScoreFinal2 = 0.0;
+    public int firstPosCount = 0;
+    public int secondPosCount = 0;
+    public int firstNegCount = 0;
+    public int secondNegCount = 0;
+    public int firstNeutralCount = 0;
+    public int secondNeutralCount = 0;
+
     int limit = 5; //the number of retrieved tweets
 
     ConfigurationBuilder cb;
@@ -90,6 +97,15 @@ public class TwitterManager {
                     String jsonScoreString = sentimentJson.getString("score");
                     Double jsonScore = Double.parseDouble(jsonScoreString);
                     score += jsonScore;
+                    if(score > 0.0) {
+                        ++firstPosCount;
+                    }
+                    if(score < 0.0) {
+                        ++firstNegCount;
+                    }
+                    if(score == 0.0) {
+                        ++firstNeutralCount;
+                    }
                 }
 
                 //*****BUG BUG BUG BUG BUG BUG********
@@ -166,6 +182,16 @@ public class TwitterManager {
                         String jsonScoreString = sentimentJson.getString("score");
                         Double jsonScore = Double.parseDouble(jsonScoreString);
                         score += jsonScore;
+                        score += jsonScore;
+                        if(score > 0.0) {
+                            ++secondPosCount;
+                        }
+                        if(score < 0.0) {
+                            ++secondNegCount;
+                        }
+                        if(score == 0.0) {
+                            ++secondNeutralCount;
+                        }
                     }
 
                     //*****BUG BUG BUG BUG BUG BUG********
