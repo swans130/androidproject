@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class battleActivity extends AppCompatActivity {
+public class battleActivity extends AppCompatActivity implements Serializable{
 
 
     //Animation points
@@ -142,6 +144,8 @@ public class battleActivity extends AppCompatActivity {
             gd.setCornerRadius(5);
             gd.setStroke(4, 0xffffffff);
 
+            final ArrayList<String> tweetArray = t.tweetArray;
+
             ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
             imgSpinner.setAnimation(null);
 
@@ -158,6 +162,11 @@ public class battleActivity extends AppCompatActivity {
                     intent.putExtra("positive2", t.secondPosCount / 3 + "");
                     intent.putExtra("neutral2", t.secondNeutralCount / 3 + "");
                     intent.putExtra("negative2", t.secondNegCount / 3 + "");
+
+
+                    Bundle extra = new Bundle();
+                    extra.putSerializable("objects", tweetArray);
+                    intent.putExtra("tweetArray", tweetArray);
                     startActivity(intent);
                 }
             });

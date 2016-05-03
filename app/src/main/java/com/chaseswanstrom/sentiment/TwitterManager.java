@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import twitter4j.conf.ConfigurationBuilder;
 /**
  * Created by chaseswanstrom on 4/12/16.
  */
-public class TwitterManager {
+public class TwitterManager implements Serializable{
 
 
     public String tweetText;
@@ -35,6 +36,7 @@ public class TwitterManager {
     public int secondNegCount = 0;
     public int firstNeutralCount = 0;
     public int secondNeutralCount = 0;
+    public ArrayList<String> tweetArray = new ArrayList<String>();
 
     int limit = 5; //the number of retrieved tweets
 
@@ -61,6 +63,7 @@ public class TwitterManager {
                 r = twitter.search(query);
                 ArrayList ts = (ArrayList) r.getTweets();
                 for (int i = 0; i < limit - 1; ++i) {
+                    if(ts.get(i)!= null){
                     count++;
                     Status t = (Status) ts.get(i);
                     tweetText = t.getText();
@@ -69,6 +72,9 @@ public class TwitterManager {
                     cleanQuery = Uri.encode(tweetText);
                     //log the tweet for testing analysis
                     Log.v("tweet: ", tweetText);
+                        tweetArray.add(tweetText);
+                    }
+
 
             //set up the sentiment analysis api
             URL url;
@@ -137,6 +143,7 @@ public class TwitterManager {
     public void performQuery2(String inQuery) throws InterruptedException, IOException {
 
         Query query = new Query(inQuery);
+
         //number of retrieved tweets
         query.setCount(5);
         try {
@@ -145,6 +152,7 @@ public class TwitterManager {
             QueryResult r;
             r = twitter.search(query);
             ArrayList ts = (ArrayList) r.getTweets();
+
             for (int i = 0; i < limit - 1; ++i) {
                 count++;
                 Status t = (Status) ts.get(i);
@@ -154,6 +162,7 @@ public class TwitterManager {
                 cleanQuery = Uri.encode(tweetText);
                 //log the tweet for testing analysis
                 Log.v("tweet: ", tweetText);
+
 
                 //set up the sentiment analysis api
                 URL url;
