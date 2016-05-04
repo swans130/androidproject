@@ -17,20 +17,21 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.chaseswanstrom.sentiment.R.id.TextViewTitle1;
 
-public class ResultsActivity extends AppCompatActivity {
+public class singleModeResults extends AppCompatActivity implements Serializable{
 
 
-//    SentimentActivity s = new SentimentActivity();
+    //    SentimentActivity s = new SentimentActivity();
 //    TwitterManager t = new TwitterManager();
     battleActivity b = new battleActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_single_mode_results);
 
         GradientDrawable gd = new GradientDrawable();
         gd.setCornerRadius(5);
@@ -40,10 +41,6 @@ public class ResultsActivity extends AppCompatActivity {
         Bundle extra = getIntent().getBundleExtra("extra");
 
         final ArrayList<String> tweetArray = (ArrayList<String>) getIntent().getExtras().getSerializable("tweetArray");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                tweetArray );
 
         TextView query1 = (TextView) findViewById(R.id.textViewQuery1term);
         query1.setBackground(gd);
@@ -52,23 +49,17 @@ public class ResultsActivity extends AppCompatActivity {
         results1.setText("Positive Tweets: " + intent.getStringExtra("positive").toString() + "\n"
                 + "Neutral Tweets: " + intent.getStringExtra("neutral").toString() + "\n" + "Negative Tweets: " + intent.getStringExtra("negative").toString());
 
-        TextView query2 = (TextView) findViewById(R.id.textViewQuery2term);
-        query2.setBackground(gd);
-        query2.setText(b.queryWord2.toUpperCase());
-        TextView results2 = (TextView) findViewById(R.id.textView2results);
-        results2.setText("Positive Tweets: " + intent.getStringExtra("positive2").toString() + "\n"
-                + "Neutral Tweets: " + intent.getStringExtra("neutral2").toString() + "\n" + "Negative Tweets: " + intent.getStringExtra("negative2").toString());
 
 
         Button topMashers = (Button) findViewById(R.id.buttonTM);
         topMashers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(ResultsActivity.this, TopMashersActivity.class);
+                Intent myIntent = new Intent(singleModeResults.this, TopMashersActivity.class);
                 Bundle extra = new Bundle();
                 extra.putSerializable("objects", tweetArray);
                 myIntent.putExtra("tweetArray", tweetArray);
-                ResultsActivity.this.startActivity(myIntent);
+                singleModeResults.this.startActivity(myIntent);
             }
         });
 

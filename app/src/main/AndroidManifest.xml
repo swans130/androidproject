@@ -27,8 +27,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".battleActivity"></activity>
-        <activity android:name=".TopMashersActivity"></activity>
+        <activity android:name=".battleActivity" />
+        <activity android:name=".TopMashersActivity" />
+        <activity android:name=".singleModeResults"></activity>
     </application>
 
 </manifest>

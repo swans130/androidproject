@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SentimentActivity extends AppCompatActivity {
 
@@ -141,11 +142,19 @@ public class SentimentActivity extends AppCompatActivity {
             Button results = (Button) findViewById(R.id.buttonResults);
             results.setVisibility(View.VISIBLE);
             results.setBackground(gd);
+
+            final ArrayList<String> tweetArray = t.tweetArray;
+
             results.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
-                    intent.putExtra("neutral", t.firstNeutralCount + "");
+                    Intent intent = new Intent(getApplicationContext(), singleModeResults.class);
+                    intent.putExtra("positive", t.firstPosCount / 3 + "");
+                    intent.putExtra("neutral", t.firstNeutralCount / 3 + "");
+                    intent.putExtra("negative", t.firstNegCount / 3 + "");
+                    Bundle extra = new Bundle();
+                    extra.putSerializable("objects", tweetArray);
+                    intent.putExtra("tweetArray", tweetArray);
                     startActivity(intent);
                 }
             });

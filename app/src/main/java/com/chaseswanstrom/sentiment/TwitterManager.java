@@ -154,15 +154,16 @@ public class TwitterManager implements Serializable{
             ArrayList ts = (ArrayList) r.getTweets();
 
             for (int i = 0; i < limit - 1; ++i) {
-                count++;
-                Status t = (Status) ts.get(i);
-                tweetText = t.getText();
-                //clean the tweet so it can be added as query in sentiment api string
-                tweetText = tweetText.replace("&", "");
-                cleanQuery = Uri.encode(tweetText);
-                //log the tweet for testing analysis
-                Log.v("tweet: ", tweetText);
-
+                if(ts.get(i)!= null) {
+                    count++;
+                    Status t = (Status) ts.get(i);
+                    tweetText = t.getText();
+                    //clean the tweet so it can be added as query in sentiment api string
+                    tweetText = tweetText.replace("&", "");
+                    cleanQuery = Uri.encode(tweetText);
+                    //log the tweet for testing analysis
+                    Log.v("tweet: ", tweetText);
+                }
 
                 //set up the sentiment analysis api
                 URL url;
