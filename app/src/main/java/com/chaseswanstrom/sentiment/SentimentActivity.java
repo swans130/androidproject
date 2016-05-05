@@ -1,8 +1,11 @@
 package com.chaseswanstrom.sentiment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +56,8 @@ public class SentimentActivity extends AppCompatActivity {
         rotation.setDuration(20000);
         imgSpinner.setVisibility(View.INVISIBLE);
 
+
+
         if (sentimentButton != null) {
             sentimentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,13 +66,18 @@ public class SentimentActivity extends AppCompatActivity {
                     queryWord1 = qw.getText().toString();
                     final Button battleModeButton = (Button) findViewById(R.id.battleModeButton);
                     battleModeButton.setVisibility(View.INVISIBLE);
-                    tweetAsync ta = new tweetAsync();
-                    ta.execute(queryWord1);
-                    sentimentButton.setVisibility(View.INVISIBLE);
-                    imgSpinner.setVisibility(View.VISIBLE);
-                    imgSpinner.startAnimation(rotation);
+                    if (isNetworkAvailable() == true) {
+                        tweetAsync ta = new tweetAsync();
+                        ta.execute(queryWord1);
+                        sentimentButton.setVisibility(View.INVISIBLE);
+                        imgSpinner.setVisibility(View.VISIBLE);
+                        imgSpinner.startAnimation(rotation);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Could not connect, please check Internet Connectivity",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-
             });
         }
 
@@ -92,6 +103,17 @@ public class SentimentActivity extends AppCompatActivity {
         Intent intent = new Intent (SentimentActivity.this, battleActivity.class);
         startActivity(intent);
     }*/
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
+    }
 
     public class tweetAsync extends AsyncTask<String, Void, String> {
 
@@ -161,7 +183,9 @@ public class SentimentActivity extends AppCompatActivity {
             TextView tv = (TextView) findViewById(R.id.textViewScore);
             tv.setText(t.totalScoreFinal.toString());
             String score = t.totalScoreFinal.toString();
-            score = score.substring(0, 5);
+            if(score.length() > 6){
+                score = score.substring(0, 5);
+            }
             tv.setText(queryWord1.toString().toUpperCase() + " SCORE IS " + score);
             final Button retryButton = (Button) findViewById(R.id.retryButton);
             retryButton.setVisibility(View.VISIBLE);

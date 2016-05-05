@@ -1,8 +1,11 @@
 package com.chaseswanstrom.sentiment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -63,17 +67,22 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                     final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
                     singleModeButton.setVisibility(View.INVISIBLE);
                     queryWord1 = qw.getText().toString();
-                    tweetAsync ta = new tweetAsync();
-                    ta.execute(queryWord1);
-                    EditText qw2 = (EditText) findViewById(R.id.editTextQueryWord2);
-                    queryWord2 = qw2.getText().toString();
-                    tweetAsync ta2 = new tweetAsync();
-                    ta2.execute(queryWord2);
-                    sentimentButton.setVisibility(View.INVISIBLE);
-                    imgSpinner.setVisibility(View.VISIBLE);
-                    imgSpinner.startAnimation(rotation);
+                    if (isNetworkAvailable() == true) {
+                        tweetAsync ta = new tweetAsync();
+                        ta.execute(queryWord1);
+                        EditText qw2 = (EditText) findViewById(R.id.editTextQueryWord2);
+                        queryWord2 = qw2.getText().toString();
+                        tweetAsync ta2 = new tweetAsync();
+                        ta2.execute(queryWord2);
+                        sentimentButton.setVisibility(View.INVISIBLE);
+                        imgSpinner.setVisibility(View.VISIBLE);
+                        imgSpinner.startAnimation(rotation);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Could not connect, please check Internet Connectivity",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
-
             });
         }
         singleModeButton.setOnClickListener(new View.OnClickListener()
@@ -99,6 +108,17 @@ public class battleActivity extends AppCompatActivity implements Serializable{
     public void sendMessage (View view){
         Intent intent = new Intent (this, battleActivity.class);
         startActivity(intent);
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
     public class tweetAsync extends AsyncTask<String, Void, String> {

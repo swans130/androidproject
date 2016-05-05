@@ -1,7 +1,9 @@
 package com.chaseswanstrom.sentiment;
 
+import android.app.Application;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -23,7 +25,7 @@ import twitter4j.conf.ConfigurationBuilder;
 /**
  * Created by chaseswanstrom on 4/12/16.
  */
-public class TwitterManager implements Serializable{
+public class TwitterManager extends Application implements Serializable{
 
 
     public String tweetText;
@@ -63,17 +65,18 @@ public class TwitterManager implements Serializable{
                 r = twitter.search(query);
                 ArrayList ts = (ArrayList) r.getTweets();
                 for (int i = 0; i < limit - 1; ++i) {
-                    if(ts.get(i)!= null){
-                    count++;
-                    Status t = (Status) ts.get(i);
-                    tweetText = t.getText();
-                    //clean the tweet so it can be added as query in sentiment api string
-                    tweetText = tweetText.replace("&", "");
-                    cleanQuery = Uri.encode(tweetText);
-                    //log the tweet for testing analysis
-                    Log.v("tweet: ", tweetText);
+                    if (ts.get(i) != null) {
+                        count++;
+                        Status t = (Status) ts.get(i);
+                        tweetText = t.getText();
+                        //clean the tweet so it can be added as query in sentiment api string
+                        tweetText = tweetText.replace("&", "");
+                        cleanQuery = Uri.encode(tweetText);
+                        //log the tweet for testing analysis
+                        Log.v("tweet: ", tweetText);
                         tweetArray.add(tweetText);
                     }
+
 
 
             //set up the sentiment analysis api
@@ -132,13 +135,11 @@ public class TwitterManager implements Serializable{
         //if twitter api fails
         catch (TwitterException te) {
             System.out.println("Couldn't connect: " + te);
+
         }
-
-
     }
 
     //SECOND FUNCTION
-
 
     public void performQuery2(String inQuery) throws InterruptedException, IOException {
 
