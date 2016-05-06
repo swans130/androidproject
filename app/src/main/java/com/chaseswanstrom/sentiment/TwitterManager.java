@@ -20,6 +20,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
@@ -32,6 +33,16 @@ public class TwitterManager extends Application implements Serializable{
     public String cleanQuery;
     public Double totalScoreFinal = 0.0;
     public Double totalScoreFinal2 = 0.0;
+    public Double maxPos1 = 0.0;
+    public Double maxPos2 = 0.0;
+    public String unPos1;
+    public String unPos2;
+    public String dnPos1;
+    public String dnPos2;
+    public String tweetPos1;
+    public String tweetPos2;
+    public String imgPos1;
+    public String imgPos2;
     public int firstPosCount = 0;
     public int secondPosCount = 0;
     public int firstNegCount = 0;
@@ -63,6 +74,7 @@ public class TwitterManager extends Application implements Serializable{
             int count = 0;
             QueryResult r;
                 r = twitter.search(query);
+                Log.v("Log R>>>", r.toString());
                 ArrayList ts = (ArrayList) r.getTweets();
                 for (int i = 0; i < limit - 1; ++i) {
                     if (ts.get(i) != null) {
@@ -79,10 +91,10 @@ public class TwitterManager extends Application implements Serializable{
 
 
 
-            //set up the sentiment analysis api
-            URL url;
+                //set up the sentiment analysis api
+                URL url;
 
-            try {
+                try {
 
                 //Log.e("tweet value:", cleanQuery); testing to make sure the tweet has been cleaned
                 //feed the tweet into the sentiment api
@@ -116,6 +128,16 @@ public class TwitterManager extends Application implements Serializable{
                         ++firstNeutralCount;
                     }
                 }
+                    if (score > maxPos1){
+                        maxPos1 = score;
+                        Status s = (Status) ts.get(i);
+                        User u = (User) s.getUser();
+                        imgPos1 = u.getProfileImageURL();
+                        unPos1 = u.getScreenName();
+                        dnPos1 = u.getName();
+                        tweetPos1 = s.getText();
+                    }
+
                 //firstPosCount = (firstPosCount);
                 //*****BUG BUG BUG BUG BUG BUG********
                 //workaround
@@ -205,6 +227,15 @@ public class TwitterManager extends Application implements Serializable{
                         }
                     }
 
+                    if (score > maxPos2){
+                        maxPos2 = score;
+                        Status s = (Status) ts.get(i);
+                        User u = (User) s.getUser();
+                        imgPos2 = u.getProfileImageURL();
+                        unPos2 = u.getScreenName();
+                        dnPos2 = u.getName();
+                        tweetPos2 = s.getText();
+                    }
                     //*****BUG BUG BUG BUG BUG BUG********
                     //workaround
                     //the score is being returned 3 times so must divide by 3

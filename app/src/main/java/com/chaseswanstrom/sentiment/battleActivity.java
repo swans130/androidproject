@@ -1,5 +1,7 @@
 package com.chaseswanstrom.sentiment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -28,9 +31,8 @@ public class battleActivity extends AppCompatActivity implements Serializable{
 
 
     //Animation points
-    private static final float ROTATE_FROM = 0.0f;
-    private static final float ROTATE_TO = 10.0f * 360.0f;// 3.141592654f * 32.0f;
-
+    private static final float ROTATE1 = -36.0f;
+    private static final float ROTATE2 = 36.0f;
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
     public static String queryWord1 = "";
@@ -53,10 +55,6 @@ public class battleActivity extends AppCompatActivity implements Serializable{
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
         sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
-        final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotation.setInterpolator(new LinearInterpolator());
-        rotation.setRepeatCount(Animation.INFINITE);
-        rotation.setDuration(20000);
         imgSpinner.setVisibility(View.INVISIBLE);
 
         if (sentimentButton != null) {
@@ -76,7 +74,11 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                         ta2.execute(queryWord2);
                         sentimentButton.setVisibility(View.INVISIBLE);
                         imgSpinner.setVisibility(View.VISIBLE);
-                        imgSpinner.startAnimation(rotation);
+                        RotateAnimation squash = new RotateAnimation(ROTATE1, ROTATE2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                        squash.setDuration(500);
+                        squash.setRepeatMode(Animation.REVERSE);
+                        squash.setRepeatCount(Animation.INFINITE);
+                        imgSpinner.startAnimation(squash);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Could not connect, please check Internet Connectivity",
@@ -182,6 +184,14 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                     intent.putExtra("positive2", t.secondPosCount / 3 + "");
                     intent.putExtra("neutral2", t.secondNeutralCount / 3 + "");
                     intent.putExtra("negative2", t.secondNegCount / 3 + "");
+                    intent.putExtra("unPos1", t.unPos1);
+                    intent.putExtra("dnPos1", t.dnPos1);
+                    intent.putExtra("imgPos1", t.imgPos1);
+                    intent.putExtra("unPos2", t.unPos2);
+                    intent.putExtra("dnPos2", t.dnPos2);
+                    intent.putExtra("imgPos2", t.imgPos2);
+                    intent.putExtra("tweetPos1", t.tweetPos1);
+                    intent.putExtra("tweetPos2", t.tweetPos2);
 
 
                     Bundle extra = new Bundle();

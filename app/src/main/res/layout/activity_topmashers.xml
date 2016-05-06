@@ -23,10 +23,77 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <ListView
+    <ImageButton
+        android:id="@+id/ibT1Positive"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/twittersquarelogo"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        />
+    <TextView
+        android:id="@+id/tvDisplaynameT1Positive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tweetView"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvTitle" />
+        android:text="DisplayNameGoesHere"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvTitle"
+        android:layout_toRightOf="@+id/ibT1Positive"/>
+    <TextView
+        android:id="@+id/tvUsernameT1Positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@UserNameGoesHere"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvDisplaynameT1Positive"
+        android:layout_toRightOf="@+id/ibT1Positive"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The actual tweet text will go here, it should be long enough to support 140 characters. This phrase right here is actually 140 characters!!!"
+        android:layout_below="@+id/ibT1Positive"
+        android:layout_alignLeft="@id/ibT1Positive"
+        android:layout_marginRight="60dp"
+        android:id="@+id/tvTweetT1Positive"/>
+
+
+    <ImageButton
+        android:id="@+id/ibT2Positive"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/twittersquarelogo"
+        android:layout_below="@id/tvTweetT1Positive"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        />
+    <TextView
+        android:id="@+id/tvDisplaynameT2Positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DisplayNameGoesHere"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvTweetT1Positive"
+        android:layout_toRightOf="@+id/ibT1Positive"/>
+    <TextView
+        android:id="@+id/tvUsernameT2Positive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@UserNameGoesHere"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/tvDisplaynameT2Positive"
+        android:layout_toRightOf="@+id/ibT2Positive"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The actual tweet text will go here, it should be long enough to support 140 characters. This phrase right here is actually 140 characters!!!"
+        android:layout_below="@+id/ibT2Positive"
+        android:layout_alignLeft="@id/ibT2Positive"
+        android:layout_marginRight="60dp"
+        android:id="@+id/tvTweetT2Positive"/>
+
+
+
 </RelativeLayout>

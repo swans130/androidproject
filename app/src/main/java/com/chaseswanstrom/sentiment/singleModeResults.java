@@ -60,6 +60,7 @@ public class singleModeResults extends AppCompatActivity implements Serializable
                 extra.putSerializable("objects", tweetArray);
                 myIntent.putExtra("tweetArray", tweetArray);
                 singleModeResults.this.startActivity(myIntent);
+
             }
         });
 

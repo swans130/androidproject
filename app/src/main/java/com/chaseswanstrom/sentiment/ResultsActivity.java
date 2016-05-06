@@ -61,6 +61,7 @@ public class ResultsActivity extends AppCompatActivity {
 
 
         Button topMashers = (Button) findViewById(R.id.buttonTM);
+        assert topMashers != null;
         topMashers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +69,15 @@ public class ResultsActivity extends AppCompatActivity {
                 Bundle extra = new Bundle();
                 extra.putSerializable("objects", tweetArray);
                 myIntent.putExtra("tweetArray", tweetArray);
+                myIntent.putExtra("unPos1", getIntent().getExtras().getSerializable("unPos1"));
+                myIntent.putExtra("dnPos1", getIntent().getExtras().getSerializable("dnPos1"));
+                myIntent.putExtra("imgPos1", getIntent().getExtras().getSerializable("imgPos1"));
+                myIntent.putExtra("unPos2", getIntent().getExtras().getSerializable("unPos2"));
+                myIntent.putExtra("dnPos2", getIntent().getExtras().getSerializable("dnPos2"));
+                myIntent.putExtra("imgPos2", getIntent().getExtras().getSerializable("imgPos2"));
+                myIntent.putExtra("tweetPos1", getIntent().getExtras().getSerializable("tweetPos1"));
+                myIntent.putExtra("tweetPos2", getIntent().getExtras().getSerializable("tweetPos2"));
+
                 ResultsActivity.this.startActivity(myIntent);
             }
         });
