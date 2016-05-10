@@ -1,6 +1,8 @@
 package com.chaseswanstrom.sentiment;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -43,6 +45,18 @@ public class TwitterManager extends Application implements Serializable{
     public String tweetPos2;
     public String imgPos1;
     public String imgPos2;
+
+    public Double maxNeg1 = 0.0;
+    public Double maxNeg2 = 0.0;
+    public String unNeg1;
+    public String unNeg2;
+    public String dnNeg1;
+    public String dnNeg2;
+    public String tweetNeg1;
+    public String tweetNeg2;
+    public String imgNeg1;
+    public String imgNeg2;
+
     public int firstPosCount = 0;
     public int secondPosCount = 0;
     public int firstNegCount = 0;
@@ -50,6 +64,11 @@ public class TwitterManager extends Application implements Serializable{
     public int firstNeutralCount = 0;
     public int secondNeutralCount = 0;
     public ArrayList<String> tweetArray = new ArrayList<String>();
+
+    public Bitmap img1BMP;
+    public Bitmap img2BMP;
+    public Bitmap img3BMP;
+    public Bitmap img4BMP;
 
     int limit = 5; //the number of retrieved tweets
 
@@ -128,6 +147,7 @@ public class TwitterManager extends Application implements Serializable{
                         ++firstNeutralCount;
                     }
                 }
+                    //Find MaxPos1
                     if (score > maxPos1){
                         maxPos1 = score;
                         Status s = (Status) ts.get(i);
@@ -136,6 +156,16 @@ public class TwitterManager extends Application implements Serializable{
                         unPos1 = u.getScreenName();
                         dnPos1 = u.getName();
                         tweetPos1 = s.getText();
+                    }
+                    //Find MaxNeg1
+                    if (score < maxNeg1){
+                        maxNeg1 = score;
+                        Status s = (Status) ts.get(i);
+                        User u = (User) s.getUser();
+                        imgNeg1 = u.getProfileImageURL();
+                        unNeg1 = u.getScreenName();
+                        dnNeg1 = u.getName();
+                        tweetNeg1 = s.getText();
                     }
 
                 //firstPosCount = (firstPosCount);
@@ -177,7 +207,7 @@ public class TwitterManager extends Application implements Serializable{
             ArrayList ts = (ArrayList) r.getTweets();
 
             for (int i = 0; i < limit - 1; ++i) {
-                if(ts.get(i)!= null) {
+                if (ts.get(i) != null) {
                     count++;
                     Status t = (Status) ts.get(i);
                     tweetText = t.getText();
@@ -209,25 +239,24 @@ public class TwitterManager extends Application implements Serializable{
                     // the total score from tweet of sentiment payload, for some reason it is adding it 3 times
                     double score = 0;
                     //get the aggregate object from json payload, isolate the score string, cast to double, add to running total
-                    for(int j = 0; j < jsonObject.length(); ++j)
-                    {
+                    for (int j = 0; j < jsonObject.length(); ++j) {
                         JSONObject sentimentJson = jsonObject.getJSONObject("aggregate");
                         String jsonScoreString = sentimentJson.getString("score");
                         Double jsonScore = Double.parseDouble(jsonScoreString);
                         score += jsonScore;
                         score += jsonScore;
-                        if(score > 0.0) {
+                        if (score > 0.0) {
                             ++secondPosCount;
                         }
-                        if(score < 0.0) {
+                        if (score < 0.0) {
                             ++secondNegCount;
                         }
-                        if(score == 0.0) {
+                        if (score == 0.0) {
                             ++secondNeutralCount;
                         }
                     }
-
-                    if (score > maxPos2){
+                    //Find MaxPos2
+                    if (score > maxPos2) {
                         maxPos2 = score;
                         Status s = (Status) ts.get(i);
                         User u = (User) s.getUser();
@@ -235,6 +264,16 @@ public class TwitterManager extends Application implements Serializable{
                         unPos2 = u.getScreenName();
                         dnPos2 = u.getName();
                         tweetPos2 = s.getText();
+                    }
+                    //Find MaxNeg2
+                    if (score < maxNeg2) {
+                        maxNeg2 = score;
+                        Status s = (Status) ts.get(i);
+                        User u = (User) s.getUser();
+                        imgNeg2 = u.getProfileImageURL();
+                        unNeg2 = u.getScreenName();
+                        dnNeg2 = u.getName();
+                        tweetNeg2 = s.getText();
                     }
                     //*****BUG BUG BUG BUG BUG BUG********
                     //workaround
@@ -256,8 +295,30 @@ public class TwitterManager extends Application implements Serializable{
             System.out.println("Couldn't connect: " + te);
         }
 
+        img1BMP = getBitmapFromURL(imgPos1);
+        img2BMP = getBitmapFromURL(imgPos2);
+        img3BMP = getBitmapFromURL(imgNeg1);
+        img4BMP = getBitmapFromURL(imgNeg2);
 
     }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
+
+
 
     //method to return the input stream from sentiment api to a java string
     String convertStreamToString(java.io.InputStream is) {

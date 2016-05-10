@@ -71,12 +71,24 @@ public class ResultsActivity extends AppCompatActivity {
                 myIntent.putExtra("tweetArray", tweetArray);
                 myIntent.putExtra("unPos1", getIntent().getExtras().getSerializable("unPos1"));
                 myIntent.putExtra("dnPos1", getIntent().getExtras().getSerializable("dnPos1"));
-                myIntent.putExtra("imgPos1", getIntent().getExtras().getSerializable("imgPos1"));
+                myIntent.putExtra("imgPos1", getIntent().getParcelableExtra("imgPos1"));
                 myIntent.putExtra("unPos2", getIntent().getExtras().getSerializable("unPos2"));
                 myIntent.putExtra("dnPos2", getIntent().getExtras().getSerializable("dnPos2"));
-                myIntent.putExtra("imgPos2", getIntent().getExtras().getSerializable("imgPos2"));
+                myIntent.putExtra("imgPos2", getIntent().getParcelableExtra("imgPos2"));
                 myIntent.putExtra("tweetPos1", getIntent().getExtras().getSerializable("tweetPos1"));
                 myIntent.putExtra("tweetPos2", getIntent().getExtras().getSerializable("tweetPos2"));
+
+                myIntent.putExtra("unNeg1", getIntent().getExtras().getSerializable("unNeg1"));
+                myIntent.putExtra("dnNeg1", getIntent().getExtras().getSerializable("dnNeg1"));
+                myIntent.putExtra("imgNeg1", getIntent().getParcelableExtra("imgNeg1"));
+                myIntent.putExtra("unNeg2", getIntent().getExtras().getSerializable("unNeg2"));
+                myIntent.putExtra("dnNeg2", getIntent().getExtras().getSerializable("dnNeg2"));
+                myIntent.putExtra("imgNeg2", getIntent().getParcelableExtra("imgNeg2"));
+                myIntent.putExtra("tweetNeg1", getIntent().getExtras().getSerializable("tweetNeg1"));
+                myIntent.putExtra("tweetNeg2", getIntent().getExtras().getSerializable("tweetNeg2"));
+
+                myIntent.putExtra("query1", getIntent().getExtras().getString("query1"));
+                myIntent.putExtra("query2", getIntent().getExtras().getString("query2"));
 
                 ResultsActivity.this.startActivity(myIntent);
             }

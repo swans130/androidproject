@@ -186,13 +186,24 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                     intent.putExtra("negative2", t.secondNegCount / 3 + "");
                     intent.putExtra("unPos1", t.unPos1);
                     intent.putExtra("dnPos1", t.dnPos1);
-                    intent.putExtra("imgPos1", t.imgPos1);
+                    intent.putExtra("imgPos1", t.img1BMP);
                     intent.putExtra("unPos2", t.unPos2);
                     intent.putExtra("dnPos2", t.dnPos2);
-                    intent.putExtra("imgPos2", t.imgPos2);
+                    intent.putExtra("imgPos2", t.img2BMP);
                     intent.putExtra("tweetPos1", t.tweetPos1);
                     intent.putExtra("tweetPos2", t.tweetPos2);
 
+                    intent.putExtra("unNeg1", t.unNeg1);
+                    intent.putExtra("dnNeg1", t.dnNeg1);
+                    intent.putExtra("imgNeg1", t.img3BMP);
+                    intent.putExtra("unNeg2", t.unNeg2);
+                    intent.putExtra("dnNeg2", t.dnNeg2);
+                    intent.putExtra("imgNeg2", t.img4BMP);
+                    intent.putExtra("tweetNeg1", t.tweetNeg1);
+                    intent.putExtra("tweetNeg2", t.tweetNeg2);
+
+                    intent.putExtra("query1", queryWord1);
+                    intent.putExtra("query2", queryWord2);
 
                     Bundle extra = new Bundle();
                     extra.putSerializable("objects", tweetArray);
