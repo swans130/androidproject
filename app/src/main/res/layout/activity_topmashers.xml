@@ -2,14 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:background="#4cc4ff"
-    tools:context="com.chaseswanstrom.sentiment.TopMashersActivity">
+    android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:background="#4cc4ff"
+        tools:context="com.chaseswanstrom.sentiment.TopMashersActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -224,5 +230,6 @@
         android:layout_alignLeft="@id/ibT2Negative"
         android:layout_marginRight="60dp"
         android:id="@+id/tvTweetT2Negative"/>
-
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
