@@ -70,7 +70,7 @@ public class TwitterManager extends Application implements Serializable{
     public Bitmap img3BMP;
     public Bitmap img4BMP;
 
-    int limit = 5; //the number of retrieved tweets
+    int limit = 10; //the number of retrieved tweets
 
     ConfigurationBuilder cb;
     Twitter twitter;
@@ -87,7 +87,7 @@ public class TwitterManager extends Application implements Serializable{
 
         Query query = new Query(inQuery);
         //number of retrieved tweets
-        query.setCount(5);
+        query.setCount(10);
         try {
 
             int count = 0;
@@ -198,7 +198,7 @@ public class TwitterManager extends Application implements Serializable{
         Query query = new Query(inQuery);
 
         //number of retrieved tweets
-        query.setCount(5);
+        query.setCount(10);
         try {
 
             int count = 0;
@@ -316,9 +316,6 @@ public class TwitterManager extends Application implements Serializable{
             return null;
         }
     }
-
-
-
 
     //method to return the input stream from sentiment api to a java string
     String convertStreamToString(java.io.InputStream is) {

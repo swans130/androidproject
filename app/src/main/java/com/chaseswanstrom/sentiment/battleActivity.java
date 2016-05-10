@@ -33,7 +33,7 @@ public class battleActivity extends AppCompatActivity implements Serializable{
     //Animation points
     private static final float ROTATE1 = -36.0f;
     private static final float ROTATE2 = 36.0f;
-    public Boolean isDone = false;
+
     TwitterManager t = new TwitterManager();
     public static String queryWord1 = "";
     public static String queryWord2 = "";
@@ -64,14 +64,12 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                     EditText qw = (EditText) findViewById(R.id.editTextQueryWord);
                     final Button singleModeButton = (Button) findViewById(R.id.sentimentButtonMode);
                     singleModeButton.setVisibility(View.INVISIBLE);
-                    queryWord1 = qw.getText().toString();
                     if (isNetworkAvailable() == true) {
                         tweetAsync ta = new tweetAsync();
-                        ta.execute(queryWord1);
+                        queryWord1 = qw.getText().toString();
                         EditText qw2 = (EditText) findViewById(R.id.editTextQueryWord2);
                         queryWord2 = qw2.getText().toString();
-                        tweetAsync ta2 = new tweetAsync();
-                        ta2.execute(queryWord2);
+                        ta.execute();
                         sentimentButton.setVisibility(View.INVISIBLE);
                         imgSpinner.setVisibility(View.VISIBLE);
                         RotateAnimation squash = new RotateAnimation(ROTATE1, ROTATE2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -104,7 +102,6 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                 battleActivity.this.startActivity(myIntent);
             }
         });
-
     }
 
     public void sendMessage (View view){
@@ -129,7 +126,6 @@ public class battleActivity extends AppCompatActivity implements Serializable{
 
         @Override
         protected void onPreExecute() {
-
 
         }
 
@@ -159,8 +155,6 @@ public class battleActivity extends AppCompatActivity implements Serializable{
         @SuppressLint("NewApi")
         @Override
         protected void onPostExecute(String result) {
-
-            //r.test = t.firstNeutralCount;
 
             GradientDrawable gd = new GradientDrawable();
             gd.setCornerRadius(5);

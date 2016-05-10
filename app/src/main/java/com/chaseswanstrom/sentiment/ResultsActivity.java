@@ -23,10 +23,8 @@ import static com.chaseswanstrom.sentiment.R.id.TextViewTitle1;
 
 public class ResultsActivity extends AppCompatActivity {
 
-
-//    SentimentActivity s = new SentimentActivity();
-//    TwitterManager t = new TwitterManager();
     battleActivity b = new battleActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
