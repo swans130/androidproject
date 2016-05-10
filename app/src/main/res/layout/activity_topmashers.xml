@@ -35,7 +35,7 @@
     <View
         android:id="@+id/bgT1Positive"
         android:layout_width="310dp"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_marginLeft="-20dp"
         android:layout_marginTop="-10dp"
         android:layout_alignLeft="@+id/ibT1Positive"
@@ -54,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pos1Display"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvTopPositiveTitle"
@@ -63,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\@UserNameGoesHere"
+        android:textStyle="italic"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvDisplaynameT1Positive"
         android:layout_toRightOf="@+id/ibT1Positive"/>
@@ -79,7 +81,7 @@
     <View
         android:id="@+id/bgT2Positive"
         android:layout_width="310dp"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_marginLeft="-20dp"
         android:layout_marginTop="-10dp"
         android:layout_alignLeft="@+id/ibT2Positive"
@@ -98,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pos2Display"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/bgT1Positive"
@@ -107,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\@UserNameGoesHere"
+        android:textStyle="italic"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvDisplaynameT2Positive"
         android:layout_toRightOf="@+id/ibT2Positive"/>
@@ -133,7 +137,7 @@
     <View
         android:id="@+id/bgT1Negative"
         android:layout_width="310dp"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_marginLeft="-20dp"
         android:layout_marginTop="-10dp"
         android:layout_alignLeft="@+id/ibT1Negative"
@@ -152,6 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Neg1Display"
+        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvTopNegativeTitle"
@@ -161,6 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\@UserNameGoesHere"
+        android:textStyle="italic"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvDisplaynameT1Negative"
         android:layout_toRightOf="@+id/ibT1Negative"/>
@@ -177,7 +183,7 @@
     <View
         android:id="@+id/bgT2Negative"
         android:layout_width="310dp"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_marginLeft="-20dp"
         android:layout_marginTop="-10dp"
         android:layout_alignLeft="@+id/ibT2Negative"
@@ -198,6 +204,7 @@
         android:text="Neg2Display"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="4dp"
+        android:textStyle="bold"
         android:layout_below="@+id/bgT1Negative"
         android:layout_toRightOf="@+id/ibT1Negative"/>
     <TextView
@@ -205,6 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\@UserNameGoesHere"
+        android:textStyle="italic"
         android:layout_marginLeft="4dp"
         android:layout_below="@+id/tvDisplaynameT2Negative"
         android:layout_toRightOf="@+id/ibT2Negative"/>

@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by cwatsonbaseball on 5/2/16.
@@ -61,11 +62,24 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
 //        fetchImageAsync fetchEm = new fetchImageAsync();
 //        fetchEm.execute(url1, url2);
 
+        //Set DisplayNames to Strings and add to an array for null checking
+        String dnPos1 = intent.getExtras().getString("dnPos1");
+        String dnPos2 = intent.getExtras().getString("dnPos2");
+        String dnNeg1 = intent.getExtras().getString("dnNeg1");
+        String dnNeg2 = intent.getExtras().getString("dnNeg2");
+        ArrayList<String> dnArray = new ArrayList<String>(Arrays.asList(dnPos1, dnPos2, dnNeg1, dnNeg2));
+        for (String s : dnArray){
+            if (s == null){
+                System.out.println("Found a null string!!!!!");
+                dnArray.set(dnArray.indexOf(s), "No results");
+            }
+        }
+
         //Positive tweet 1
         final TextView userName1 = (TextView) findViewById(R.id.tvUsernameT1Positive);
         userName1.setText((intent.getExtras().getString("unPos1")));
         TextView displayName1 = (TextView) findViewById(R.id.tvDisplaynameT1Positive);
-        displayName1.setText((intent.getExtras().getString("dnPos1")) + ": " +  "\""+query1+"\"");
+        displayName1.setText(dnArray.get(0) + ": " +  "\""+query1+"\"");
         TextView tweet1 = (TextView) findViewById(R.id.tvTweetT1Positive);
         tweet1.setText((intent.getExtras().getString("tweetPos1")));
 
@@ -73,7 +87,7 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         final TextView userName2 = (TextView) findViewById(R.id.tvUsernameT2Positive);
         userName2.setText(intent.getExtras().getString("unPos2"));
         TextView displayName2 = (TextView) findViewById(R.id.tvDisplaynameT2Positive);
-        displayName2.setText((intent.getExtras().getString("dnPos2")) + ": " +  "\""+query2+"\"");
+        displayName2.setText(dnArray.get(1) + ": " +  "\""+query2+"\"");
         TextView tweet2 = (TextView) findViewById(R.id.tvTweetT2Positive);
         tweet2.setText((intent.getExtras().getString("tweetPos2")));
 
@@ -81,7 +95,7 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         final TextView userName3 = (TextView) findViewById(R.id.tvUsernameT1Negative);
         userName3.setText((intent.getExtras().getString("unNeg1")));
         TextView displayName3 = (TextView) findViewById(R.id.tvDisplaynameT1Negative);
-        displayName3.setText((intent.getExtras().getString("dnNeg1")) + ": " +  "\""+query1+"\"");
+        displayName3.setText(dnArray.get(2) + ": " +  "\""+query1+"\"");
         TextView tweet3 = (TextView) findViewById(R.id.tvTweetT1Negative);
         tweet3.setText((intent.getExtras().getString("tweetNeg1")));
 
@@ -89,7 +103,7 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         final TextView userName4 = (TextView) findViewById(R.id.tvUsernameT2Negative);
         userName4.setText((intent.getExtras().getString("unNeg2")));
         TextView displayName4 = (TextView) findViewById(R.id.tvDisplaynameT2Negative);
-        displayName4.setText((intent.getExtras().getString("dnNeg2")) + ": " +  "\""+query2+"\"");
+        displayName4.setText(dnArray.get(3)  + ": " +  "\""+query2+"\"");
         TextView tweet4 = (TextView) findViewById(R.id.tvTweetT2Negative);
         tweet4.setText((intent.getExtras().getString("tweetNeg2")));
 

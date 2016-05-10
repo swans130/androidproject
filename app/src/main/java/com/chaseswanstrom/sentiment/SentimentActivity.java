@@ -27,8 +27,8 @@ public class SentimentActivity extends AppCompatActivity {
 
 
     //Animation points
-    private static final float ROTATE_FROM = 0.0f;
-    private static final float ROTATE_TO = 10.0f * 360.0f;// 3.141592654f * 32.0f;
+    private static final float ROTATE1 = -36.0f;
+    private static final float ROTATE2 = 36.0f;
 
     public Boolean isDone = false;
     TwitterManager t = new TwitterManager();
@@ -50,10 +50,6 @@ public class SentimentActivity extends AppCompatActivity {
         final Button sentimentButton = (Button) findViewById(R.id.buttonSentiment);
         sentimentButton.setBackground(gd);
         final ImageView imgSpinner = (ImageView) findViewById(R.id.imgSpinner);
-        final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotation.setInterpolator(new LinearInterpolator());
-        rotation.setRepeatCount(Animation.INFINITE);
-        rotation.setDuration(20000);
         imgSpinner.setVisibility(View.INVISIBLE);
 
 
@@ -70,8 +66,11 @@ public class SentimentActivity extends AppCompatActivity {
                         tweetAsync ta = new tweetAsync();
                         ta.execute(queryWord1);
                         sentimentButton.setVisibility(View.INVISIBLE);
-                        imgSpinner.setVisibility(View.VISIBLE);
-                        imgSpinner.startAnimation(rotation);
+                        RotateAnimation squash = new RotateAnimation(ROTATE1, ROTATE2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                        squash.setDuration(500);
+                        squash.setRepeatMode(Animation.REVERSE);
+                        squash.setRepeatCount(Animation.INFINITE);
+                        imgSpinner.startAnimation(squash);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Could not connect, please check Internet Connectivity",
