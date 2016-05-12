@@ -173,6 +173,18 @@ public class SentimentActivity extends AppCompatActivity {
                     intent.putExtra("positive", t.firstPosCount / 3 + "");
                     intent.putExtra("neutral", t.firstNeutralCount / 3 + "");
                     intent.putExtra("negative", t.firstNegCount / 3 + "");
+
+                    intent.putExtra("unPos1", t.unPos1);
+                    intent.putExtra("dnPos1", t.dnPos1);
+                    intent.putExtra("imgPos1", t.img1BMP);
+                    intent.putExtra("tweetPos1", t.tweetPos1);
+
+                    intent.putExtra("unNeg1", t.unNeg1);
+                    intent.putExtra("dnNeg1", t.dnNeg1);
+                    intent.putExtra("imgNeg1", t.img3BMP);
+                    intent.putExtra("tweetNeg1", t.tweetNeg1);
+
+                    intent.putExtra("query1", queryWord1);
                     Bundle extra = new Bundle();
                     extra.putSerializable("objects", tweetArray);
                     intent.putExtra("tweetArray", tweetArray);

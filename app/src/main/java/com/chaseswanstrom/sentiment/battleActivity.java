@@ -199,6 +199,8 @@ public class battleActivity extends AppCompatActivity implements Serializable{
                     intent.putExtra("query1", queryWord1);
                     intent.putExtra("query2", queryWord2);
 
+                    intent.putExtra("isSingle", false);
+
                     Bundle extra = new Bundle();
                     extra.putSerializable("objects", tweetArray);
                     intent.putExtra("tweetArray", tweetArray);

@@ -59,7 +59,22 @@ public class singleModeResults extends AppCompatActivity implements Serializable
                 Bundle extra = new Bundle();
                 extra.putSerializable("objects", tweetArray);
                 myIntent.putExtra("tweetArray", tweetArray);
+
+                myIntent.putExtra("dnPos1", getIntent().getExtras().getString("dnPos1"));
+                myIntent.putExtra("unPos1", getIntent().getExtras().getString("unPos1"));
+                myIntent.putExtra("tweetPos1", getIntent().getExtras().getString("tweetPos1"));
+                myIntent.putExtra("imgPos1", getIntent().getParcelableExtra("imgPos1"));
+
+                myIntent.putExtra("dnNeg1", getIntent().getExtras().getString("dnNeg1"));
+                myIntent.putExtra("unNeg1", getIntent().getExtras().getString("unNeg1"));
+                myIntent.putExtra("tweetNeg1", getIntent().getExtras().getString("tweetNeg1"));
+                myIntent.putExtra("imgNeg1", getIntent().getParcelableExtra("imgNeg1"));
+
+                myIntent.putExtra("query1", getIntent().getExtras().getString("query1"));
+                myIntent.putExtra("isSingle", "yes");
+
                 singleModeResults.this.startActivity(myIntent);
+
 
             }
         });
