@@ -166,15 +166,16 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         View bgT2Negative = findViewById(R.id.bgT2Negative);
         bgT2Negative.setBackground(gd);
 
+        if (getIntent().getExtras().getString("isSingle") != null) {
+            if (getIntent().getExtras().getString("isSingle").equalsIgnoreCase("yes")) {
+                System.out.print("YO DUDE IT WAS SINGLE LMFAOJKBFFJILL");
 
-        if (getIntent().getExtras().getString("isSingle").equalsIgnoreCase("yes")){
-            System.out.print("YO DUDE IT WAS SINGLE LMFAOJKBFFJILL");
+                displayName2.setText("");
+                displayName4.setText("");
+                userName2.setText("Not available in Single Mode");
+                userName4.setText("Not available in Single Mode");
 
-            displayName2.setText("");
-            displayName4.setText("");
-            userName2.setText("Not available in Single Mode");
-            userName4.setText("Not available in Single Mode");
-
+            }
         }
 
 //        final ArrayList<String> tweetArray = (ArrayList<String>) getIntent().getExtras().getSerializable("tweetArray");
