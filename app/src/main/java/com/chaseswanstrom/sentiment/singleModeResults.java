@@ -24,9 +24,6 @@ import static com.chaseswanstrom.sentiment.R.id.TextViewTitle1;
 
 public class singleModeResults extends AppCompatActivity implements Serializable{
 
-
-    //    SentimentActivity s = new SentimentActivity();
-//    TwitterManager t = new TwitterManager();
     battleActivity b = new battleActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +35,6 @@ public class singleModeResults extends AppCompatActivity implements Serializable
         gd.setStroke(4, 0xffffffff);
 
         Intent intent = getIntent();
-        Bundle extra = getIntent().getBundleExtra("extra");
 
         final ArrayList<String> tweetArray = (ArrayList<String>) getIntent().getExtras().getSerializable("tweetArray");
 

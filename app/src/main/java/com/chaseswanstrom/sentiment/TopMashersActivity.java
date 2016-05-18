@@ -48,9 +48,6 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         gd.setCornerRadius(5);
         gd.setStroke(4, 0xffffffff);
 
-        //TextView tvBorderT1Positive = (TextView) findViewById(R.id.tvBorderT1Positive);
-        //tvBorderT1Positive.setBackground(gd);
-
         Intent intent = getIntent();
         Bundle extra = getIntent().getBundleExtra("extra");
 
@@ -59,10 +56,6 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         String query1 = intent.getStringExtra("query1");
         String query2 = intent.getStringExtra("query2");
 
-//        fetchImageAsync fetchEm = new fetchImageAsync();
-//        fetchEm.execute(url1, url2);
-
-        //Set DisplayNames to Strings and add to an array for null checking
         String dnPos1 = intent.getExtras().getString("dnPos1");
         String dnPos2 = intent.getExtras().getString("dnPos2");
         String dnNeg1 = intent.getExtras().getString("dnNeg1");
@@ -82,6 +75,8 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         displayName1.setText(dnArray.get(0) + ": " +  "\""+query1+"\"");
         TextView tweet1 = (TextView) findViewById(R.id.tvTweetT1Positive);
         tweet1.setText((intent.getExtras().getString("tweetPos1")));
+        tweet1.setMaxLines(4);
+
 
         //Positive tweet 2
         final TextView userName2 = (TextView) findViewById(R.id.tvUsernameT2Positive);
@@ -90,6 +85,8 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         displayName2.setText(dnArray.get(1) + ": " +  "\""+query2+"\"");
         TextView tweet2 = (TextView) findViewById(R.id.tvTweetT2Positive);
         tweet2.setText((intent.getExtras().getString("tweetPos2")));
+        tweet2.setMaxLines(4);
+
 
         //Negative tweet 1
         final TextView userName3 = (TextView) findViewById(R.id.tvUsernameT1Negative);
@@ -98,6 +95,8 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         displayName3.setText(dnArray.get(2) + ": " +  "\""+query1+"\"");
         TextView tweet3 = (TextView) findViewById(R.id.tvTweetT1Negative);
         tweet3.setText((intent.getExtras().getString("tweetNeg1")));
+        tweet3.setMaxLines(4);
+
 
         //Negative tweet 2
         final TextView userName4 = (TextView) findViewById(R.id.tvUsernameT2Negative);
@@ -106,6 +105,7 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
         displayName4.setText(dnArray.get(3)  + ": " +  "\""+query2+"\"");
         TextView tweet4 = (TextView) findViewById(R.id.tvTweetT2Negative);
         tweet4.setText((intent.getExtras().getString("tweetNeg2")));
+        tweet4.setMaxLines(4);
 
         //Positive Image Button Setups
         ImageButton ib1 = (ImageButton) findViewById(R.id.ibT1Positive);
@@ -177,14 +177,6 @@ public class TopMashersActivity extends AppCompatActivity implements Serializabl
 
             }
         }
-
-//        final ArrayList<String> tweetArray = (ArrayList<String>) getIntent().getExtras().getSerializable("tweetArray");
-//        ListView tweetView = (ListView) findViewById(R.id.tweetView);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//                this,
-//                android.R.layout.simple_list_item_1,
-//                tweetArray );
-//        tweetView.setAdapter(arrayAdapter);
 
     }
 

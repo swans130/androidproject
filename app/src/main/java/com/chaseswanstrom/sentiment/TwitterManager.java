@@ -108,15 +108,9 @@ public class TwitterManager extends Application implements Serializable{
                         tweetArray.add(tweetText);
                     }
 
-
-
-                //set up the sentiment analysis api
                 URL url;
 
                 try {
-
-                //Log.e("tweet value:", cleanQuery); testing to make sure the tweet has been cleaned
-                //feed the tweet into the sentiment api
                 HttpURLConnection urlConnection = null;
                 String api = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text=" + cleanQuery + "&apikey=90b03d84-c5c7-4166-b358-212950d125fc";
                 url = new URL(api);
@@ -168,13 +162,8 @@ public class TwitterManager extends Application implements Serializable{
                         tweetNeg1 = s.getText();
                     }
 
-                //firstPosCount = (firstPosCount);
-                //*****BUG BUG BUG BUG BUG BUG********
-                //workaround
-                //the score is being returned 3 times so must divide by 3
                 double totalScore = score / 3.0;
                 totalScoreFinal += totalScore;
-                //Log.d("total score", Double.toString(totalScore)); for testing purposes, will see it added 3 times and thus incorrect
                 Log.d("total score tweet 1", Double.toString(totalScore));
 
                 } catch (Exception e) {
@@ -223,8 +212,6 @@ public class TwitterManager extends Application implements Serializable{
 
                 try {
 
-                    //Log.e("tweet value:", cleanQuery); testing to make sure the tweet has been cleaned
-                    //feed the tweet into the sentiment api
                     HttpURLConnection urlConnection = null;
                     String api = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text=" + cleanQuery + "&apikey=90b03d84-c5c7-4166-b358-212950d125fc";
                     url = new URL(api);
@@ -275,9 +262,6 @@ public class TwitterManager extends Application implements Serializable{
                         dnNeg2 = u.getName();
                         tweetNeg2 = s.getText();
                     }
-                    //*****BUG BUG BUG BUG BUG BUG********
-                    //workaround
-                    //the score is being returned 3 times so must divide by 3
                     double totalScore = score / 3.0;
                     totalScoreFinal2 += totalScore;
                     //Log.d("total score", Double.toString(totalScore)); for testing purposes, will see it added 3 times and thus incorrect
